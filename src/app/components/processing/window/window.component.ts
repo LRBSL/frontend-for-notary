@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-window',
+  selector: 'app-processing-window',
   templateUrl: './window.component.html',
   styleUrls: ['./window.component.css']
 })

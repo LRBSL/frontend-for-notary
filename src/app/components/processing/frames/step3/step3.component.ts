@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-step3',
+  selector: 'app-processing-step3',
   templateUrl: './step3.component.html',
   styleUrls: ['./step3.component.css']
 })
