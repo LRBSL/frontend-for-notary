@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {FormControl, FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-processing-step1',
@@ -6,10 +7,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./step1.component.css']
 })
 export class Step1Component implements OnInit {
+  ownerDataForm = new FormGroup({
+    ownerNIC: new FormControl(''),
+    landKey: new FormControl('')
+  });
 
   constructor() { }
 
   ngOnInit() {
   }
 
+  submitData() {
+    return 0;
+  }
 }
