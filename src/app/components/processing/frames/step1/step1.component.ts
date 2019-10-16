@@ -16,8 +16,4 @@ export class Step1Component implements OnInit {
 
   ngOnInit() {
   }
-
-  submitData() {
-    return 0;
-  }
 }
