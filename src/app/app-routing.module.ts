@@ -7,10 +7,10 @@ import {SupportFacilitiesComponent} from './components/processing/pages/support-
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'dashboard' },
-  { path: 'dashboard', component: DashboardComponent, data: { animation: 'dashboard-window'} },
-  { path: 'land-registration', component: LandRegistrationComponent, data: { animation: 'land-registration-window'}  },
-  { path: 'land-records', component: LandRecordsComponent },
-  { path: 'support-facilities', component: SupportFacilitiesComponent }
+  { path: 'dashboard', component: DashboardComponent, data: { animation: 'Dashboard' } },
+  { path: 'land-registration', component: LandRegistrationComponent, data: { animation: 'Land-Registration' } },
+  { path: 'land-records', component: LandRecordsComponent, data: { animation: 'Land-Records' } },
+  { path: 'support-facilities', component: SupportFacilitiesComponent, data: { animation: 'Support-Facilities' } }
 ];
 
 @NgModule({

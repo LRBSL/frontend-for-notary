@@ -1,54 +1,23 @@
 import {
-  sequence,
-  trigger,
-  stagger,
-  animate,
-  style,
-  group,
-  query as q,
   transition,
-  keyframes,
-  animateChild,
+  trigger,
+  query,
+  style,
+  animate
 } from '@angular/animations';
 
-// tslint:disable-next-line:no-shadowed-variable
-const query = (style, animate, optional = { optional: true }) => q(style, animate, optional);
-
-const fade = [
-  query(':enter, :leave', style({ position: 'fixed', width: '100%' })),
-  query(':enter', [style({ opacity: 0 })]),
-  group([
-    query(':leave', [animate('0.3s ease-out', style({ opacity: 0 }))]),
-    query(':enter', [
-      style({ opacity: 0 }),
-      animate('0.3s ease-out', style({ opacity: 1 })),
-    ]),
-  ]),
-];
-
-const fadeInFromDirection = direction => [
-  query(':enter, :leave', style({ position: 'fixed', width: '100%' })),
-  group([
-    query(':enter', [
-      style({
-        transform: `translateX(${direction === 'backward' ? '-' : ''}15%)`,
-        opacity: 0,
-      }),
-      animate(
-        '0.3s ease-out',
-        style({ transform: 'translateX(0%)', opacity: 1 }),
-      ),
-    ]),
-    query(':leave', [
-      style({ transform: 'translateX(0%)' }),
-      animate('0.3s ease-out', style({ opacity: 0 })),
-    ]),
-  ]),
-];
-
-export const routerTransition = trigger('routerTransition', [
-  transition('* => initial', fade),
-  transition('* => section', fade),
-  transition('* => forward', fadeInFromDirection('forward')),
-  transition('* => backward', fadeInFromDirection('backward')),
-]);
+export const fadeAnimation =
+  trigger('fadeAnimation', [
+    transition('* => *',
+      [
+        query(':enter',
+          [style({ opacity: 0 })],
+          { optional: true }),
+        query(':leave',
+          [style({ opacity: 1 , display: 'none' }), animate('250ms', style({ opacity: 0 }))],
+          { optional: true }),
+        query(':enter',
+          [style({ opacity: 0 }), animate('250ms', style({ opacity: 1 }))],
+          { optional: true }),
+      ])
+  ]);
