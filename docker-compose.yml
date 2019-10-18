@@ -9,14 +9,30 @@ services:
       - '.:/app'
       - '/app/node_modules'
     ports:
-      - '4201:4200'
+      - '4000:4200'
     networks:
       lrbsl_net:
-        ipv4_address: 172.230.0.1
+        ipv4_address: 172.28.1.1
+
+  database:
+    container_name: db-mysql
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - 'logvolume01:/var/log'
+    ports:
+      - '4001:3306'
+    networks:
+      lrbsl_net:
+        ipv4_address: 172.28.1.5
+
+volumes:
+  logvolume01: {}
 
 networks:
   lrbsl_net:
     ipam:
       driver: default
       config:
-        - subnet: "172.230.0.0/26"
+        - subnet: '172.28.0.0/16'

@@ -16,6 +16,7 @@ import { LandRegistrationComponent } from './components/processing/pages/land-re
 import { DashboardComponent } from './components/processing/pages/dashboard/dashboard.component';
 import { LandRecordsComponent } from './components/processing/pages/land-records/land-records.component';
 import { SupportFacilitiesComponent } from './components/processing/pages/support-facilities/support-facilities.component';
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { SupportFacilitiesComponent } from './components/processing/pages/suppor
     LandRegistrationComponent,
     DashboardComponent,
     LandRecordsComponent,
-    SupportFacilitiesComponent
+    SupportFacilitiesComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
