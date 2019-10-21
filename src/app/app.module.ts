@@ -17,6 +17,9 @@ import { DashboardComponent } from './components/processing/pages/dashboard/dash
 import { LandRecordsComponent } from './components/processing/pages/land-records/land-records.component';
 import { SupportFacilitiesComponent } from './components/processing/pages/support-facilities/support-facilities.component';
 import { LoginComponent } from './components/login/login.component';
+import { HttpClientModule } from '@angular/common/http';
+import { AuthService } from './services/auth.service';
+import { HttpRequestResolverService } from './services/http-request-resolver.service';
 
 @NgModule({
   declarations: [
@@ -38,7 +41,8 @@ import { LoginComponent } from './components/login/login.component';
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

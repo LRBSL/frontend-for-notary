@@ -11,7 +11,7 @@ import {Step4Component} from './components/processing/frames/step4/step4.compone
 import { LoginComponent } from './components/login/login.component';
 
 const routes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: 'dashboard' },
+  { path: '', pathMatch: 'full', redirectTo: 'login' },
   { path: 'login', component: LoginComponent },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'land-registration', component: LandRegistrationComponent,

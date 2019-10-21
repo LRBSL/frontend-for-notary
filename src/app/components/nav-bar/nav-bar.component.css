@@ -1,4 +1,4 @@
-a:hover, a:focus {
+a:hover, a:focus, button:hover {
   color: white !important;
 }
 
