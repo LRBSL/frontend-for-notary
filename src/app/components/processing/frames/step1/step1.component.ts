@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
+import { LandRegistrationService } from 'src/app/services/land-registration.service';
 
 @Component({
   selector: 'app-processing-step1',
@@ -12,8 +13,9 @@ export class Step1Component implements OnInit {
     landKey: new FormControl('')
   });
 
-  constructor() { }
+  constructor(private lrService: LandRegistrationService) { }
 
   ngOnInit() {
+    this.lrService.setCurrentStep(1);
   }
 }

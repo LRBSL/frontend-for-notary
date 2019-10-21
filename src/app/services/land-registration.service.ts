@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { HttpRequestResolverService } from './http-request-resolver.service';
 
 export interface Step {
   count: number;
@@ -24,9 +25,12 @@ export class LandRegistrationService {
   // variable declaration
   private currentStep: Step;
   private ownerCredentials: OwnerCredentials;
+  private landID: string;
 
   // constructor
-  constructor() { }
+  constructor(private httpService: HttpRequestResolverService) {
+    this.ownerCredentials = null;
+  }
 
   // get the current step
   public getCurrentStep(): Step {
@@ -42,7 +46,21 @@ export class LandRegistrationService {
     return this.ownerCredentials;
   }
   // set owner credentials
-  public  setOwnerCredentials(ownerCredentials: OwnerCredentials) {
+  public setOwnerCredentials(ownerCredentials: OwnerCredentials) {
     this.ownerCredentials = ownerCredentials;
+  }
+
+  // get the land id
+  public getLandID(): string {
+    return this.landID;
+  }
+  // set the land id
+  public setLandID(landID: string): void {
+    this.landID = landID;
+  }
+
+  // get the land id from mapper table
+  public getLandIdFromMapper(ownerCredentials: OwnerCredentials) {
+    return this.httpService.realizarHttpPost('/api/landCredentials', ownerCredentials)
   }
 }

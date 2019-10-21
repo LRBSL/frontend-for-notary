@@ -8,8 +8,8 @@
   <div class="col">
     <div class="row">
       <div class="progress w-100 mb-4">
-        <div class="progress-bar bg-success" role="progressbar" style="width:0{{stepPercentage}}%"
-             aria-valuenow="1" aria-valuemin="1" aria-valuemax="4"></div>
+        <div class="progress-bar bg-success" role="progressbar" [style.width.%]="stepPercentage"
+             aria-valuenow="1" aria-valuemin="1" aria-valuemax="4" ></div>
       </div>
     </div>
     <div class="row border">
@@ -23,10 +23,10 @@
 <!-- footer section -->
 <div class="row card-footer">
   <div class="col-2 offset-6">
-    <button class="btn btn-dark btn-block">Cancel</button>
+    <button class="btn btn-dark btn-block" (click)="cancelProcess()">Cancel</button>
   </div>
   <div class="col-2">
-    <button class="btn btn-primary btn-block">Back</button>
+    <button class="btn btn-primary btn-block" (click)="goBack()">Back</button>
   </div>
   <div class="col-2">
     <button class="btn btn-success btn-block" (click)="onSubmit()">Proceed</button>

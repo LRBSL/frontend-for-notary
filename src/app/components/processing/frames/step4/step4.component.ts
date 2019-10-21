@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LandRegistrationService } from 'src/app/services/land-registration.service';
 
 @Component({
   selector: 'app-processing-step4',
@@ -7,9 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class Step4Component implements OnInit {
 
-  constructor() { }
+  constructor(private lrService: LandRegistrationService) { }
 
   ngOnInit() {
+    this.lrService.setCurrentStep(4);
   }
 
 }
