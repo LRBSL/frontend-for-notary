@@ -63,4 +63,8 @@ export class LandRegistrationService {
   public getLandIdFromMapper(ownerCredentials: OwnerCredentials) {
     return this.httpService.realizarHttpPost('/api/landCredentials', ownerCredentials)
   }
+
+  public getLandBlockInfo(landID: number) {
+    return this.httpService.realizarHttpGet('http://13.229.128.106:8000/land/queryLand/' + landID);
+  }
 }

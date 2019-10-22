@@ -17,4 +17,14 @@ export class HttpRequestResolverService {
       headers: headers
     });
   }
+
+  // GET request sending function
+  realizarHttpGet(url: string) {
+    const headers = new HttpHeaders({
+      "Content-Type": "application/json"
+    });
+    return this.http.post(url, {
+      headers: headers
+    });
+  }
 }

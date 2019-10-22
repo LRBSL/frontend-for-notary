@@ -38,6 +38,9 @@ export class LandRegistrationComponent implements OnInit {
             this.lrService.setLandID(res.land_id);
             this.lrService.setCurrentStep(2);
             this.stepPercentage = 25;
+            this.lrService.getLandBlockInfo(1).subscribe((res) => {
+              console.log("Success : " + res)}, 
+              (err)=>console.log(err));
             this.router.navigate(['land-registration/step-2']);
           } else {
             alert("Owner credentials not valid / No land records to for credentials.");
