@@ -14,7 +14,7 @@
     </div>
     <div class="row">
       <div class="col">
-        <router-outlet (activate)="onActivate1($event)"></router-outlet>
+        <router-outlet (activate)="onActivate($event)"></router-outlet>
       </div>
     </div>
   </div>
@@ -29,6 +29,6 @@
     <button class="btn btn-primary btn-block" (click)="goBack()">Back</button>
   </div>
   <div class="col-2">
-    <button class="btn btn-success btn-block" (click)="onSubmit()">Proceed</button>
+    <button class="btn btn-success btn-block" (click)="onSubmit()">{{submitBtnTitle}}</button>
   </div>
 </div>

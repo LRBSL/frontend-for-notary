@@ -22,7 +22,7 @@ export interface LandBlock {
 
 export interface NIC {
   ownerNIC: string;
-  fullname?: number;
+  fullname?: string;
   gender?: string;
   birthday?: Date;
   occupation?: string;
@@ -30,11 +30,26 @@ export interface NIC {
   registered_date?: Date;
 }
 
+export interface Deed {
+  reg_no?: string;
+  land_id?: string;
+  notary_name?: string;
+  deed_type?: string;
+  plan_id?: string;
+}
+
+export interface Plan {
+  reg_no?: string;
+  land_id?: string;
+  surveyor_name?: string;
+}
+
 export const steps: Step[] = [
   {count: 1, title: 'Owner Validation'},
   {count: 2, title: 'Land Details Validation'},
-  {count: 3, title: 'New Owner Information'},
-  {count: 4, title: 'Execute The Transaction'}
+  {count: 3, title: 'New Owner Validation'},
+  {count: 4, title: 'New Owner Information'},
+  {count: 5, title: 'Execute The Transaction'}
 ];
 
 @Injectable({
@@ -47,6 +62,9 @@ export class LandRegistrationService {
   private landID: string;
   private landBlock: LandBlock;
   private ownerNIC: NIC;
+  private buyerNIC: NIC;
+  private landDeed: Deed;
+  private landPlan: Plan;
 
   // constructor
   constructor(private httpService: HttpRequestResolverService) {
@@ -54,6 +72,7 @@ export class LandRegistrationService {
     this.landID = null;
     this.landBlock = null;
     this.ownerNIC = null;
+    this.buyerNIC = null;
   }
 
   // get the current step
@@ -101,6 +120,33 @@ export class LandRegistrationService {
     this.ownerNIC = ownerNIC;
   }
 
+  // get the land deed
+  public getLandDeed(): Deed {
+    return this.landDeed;
+  }
+  // set the land deed
+  public setLandDeed(landDeed: Deed): void {
+    this.landDeed = landDeed;
+  }
+
+  // get the land plan
+  public getLandPlan(): Plan {
+    return this.landPlan;
+  }
+  // set the land plan
+  public setLandPlan(landPlan: Plan): void {
+    this.landPlan = landPlan;
+  }
+
+  // get the buyer nic
+  public getBuyerNIC(): NIC {
+    return this.buyerNIC;
+  }
+  // set the buyer nic
+  public setBuyerNIC(buyerNIC: NIC): void {
+    this.buyerNIC = buyerNIC;
+  }
+
   // get the land id from mapper table
   public getLandIdFromMapper(ownerCredentials: OwnerCredentials) {
     return this.httpService.realizarHttpPost('/api/landCredentials', ownerCredentials)
@@ -114,6 +160,16 @@ export class LandRegistrationService {
   // get the owner nic from nic table
   public getOwnerNicFromDB(ownerNIC: NIC) {
     return this.httpService.realizarHttpPost('/api/getNic', ownerNIC);
+  }
+
+  // get the land deed from deed table
+  public getLandDeedFromDB(landDeed: Deed) {
+    return this.httpService.realizarHttpPost('/api/getDeed', landDeed);
+  }
+
+  // get the land plan from plan table
+  public getLandPlanFromDB(landPlan: Plan) {
+    return this.httpService.realizarHttpPost('/api/getPlan', landPlan);
   }
   
 }

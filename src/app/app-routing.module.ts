@@ -8,6 +8,7 @@ import {Step1Component} from './components/processing/frames/step1/step1.compone
 import {Step2Component} from './components/processing/frames/step2/step2.component';
 import {Step3Component} from './components/processing/frames/step3/step3.component';
 import {Step4Component} from './components/processing/frames/step4/step4.component';
+import {Step5Component} from './components/processing/frames/step5/step5.component';
 import { LoginComponent } from './components/login/login.component';
 
 const routes: Routes = [
@@ -20,7 +21,8 @@ const routes: Routes = [
     { path: 'step-1', component: Step1Component },
     { path: 'step-2', component: Step2Component },
     { path: 'step-3', component: Step3Component },
-    { path: 'step-4', component: Step4Component }
+    { path: 'step-4', component: Step4Component },
+    { path: 'step-5', component: Step5Component }
   ]},
   { path: 'land-records', component: LandRecordsComponent },
   { path: 'support-facilities', component: SupportFacilitiesComponent },

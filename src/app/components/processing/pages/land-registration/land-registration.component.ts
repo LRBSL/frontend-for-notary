@@ -10,24 +10,27 @@ import { Router } from '@angular/router';
 export class LandRegistrationComponent implements OnInit {
 
   stepPercentage: number;
-  step1FormRef: any;
+  stepFormRef: any;
+  submitBtnTitle: string;
 
-  constructor(private router: Router, private lrService: LandRegistrationService) { }
+  constructor(private router: Router, private lrService: LandRegistrationService) {
+    this.submitBtnTitle = "Proceed";
+  }
 
   ngOnInit() {
     this.lrService.setCurrentStep(1);
     this.stepPercentage = 0;
   }
 
-  onActivate1(componentRef: any) {
-    this.step1FormRef = componentRef;
+  onActivate(componentRef: any) {
+    this.stepFormRef = componentRef;
   }
 
   onSubmit() {
     switch (this.lrService.getCurrentStep().count) {
       case 1: {
-        let owner_nic = this.step1FormRef.ownerDataForm.value.ownerNIC;
-        let land_key = this.step1FormRef.ownerDataForm.value.landKey;
+        let owner_nic = this.stepFormRef.ownerDataForm.value.ownerNIC;
+        let land_key = this.stepFormRef.ownerDataForm.value.landKey;
         // owner validation from mapper table
         this.lrService.getLandIdFromMapper({
           ownerNIC: owner_nic,
@@ -41,7 +44,7 @@ export class LandRegistrationComponent implements OnInit {
             this.lrService.setLandID(res.land_id);
             this.lrService.setCurrentStep(2);
             this.stepPercentage = 25;
-            this.lrService.getLandBlockInfo(1).subscribe((res:any) => {
+            this.lrService.getLandBlockInfo(1).subscribe((res: any) => {
               this.lrService.setLandBlock({
                 id: res._id,
                 extent: res._Extent,
@@ -55,7 +58,7 @@ export class LandRegistrationComponent implements OnInit {
                   [res._Boundaries[3][0], res._Boundaries[3][1]],
                 ]
               });
-              this.lrService.getOwnerNicFromDB({ownerNIC: owner_nic}).subscribe((res:any) => {
+              this.lrService.getOwnerNicFromDB({ ownerNIC: owner_nic }).subscribe((res: any) => {
                 this.lrService.setOwnerNIC({
                   ownerNIC: res.nic_no,
                   fullname: res.fullname,
@@ -65,8 +68,24 @@ export class LandRegistrationComponent implements OnInit {
                   postal_address: res.postal_address,
                   registered_date: res.registered_date
                 });
-              });
-            }, (err) => {console.log(err)});
+              }, (err) => { console.log(err) });
+              this.lrService.getLandDeedFromDB({ land_id: this.lrService.getLandID() }).subscribe((res: any) => {
+                this.lrService.setLandDeed({
+                  reg_no: res.reg_no,
+                  land_id: res.land_id,
+                  notary_name: res.notary_name,
+                  deed_type: res.deed_type,
+                  plan_id: res.plan_id
+                });
+              }, (err) => { console.log(err) });
+              this.lrService.getLandPlanFromDB({ land_id: this.lrService.getLandID() }).subscribe((res: any) => {
+                this.lrService.setLandPlan({
+                  reg_no: res.reg_no,
+                  land_id: res.land_id,
+                  surveyor_name: res.surveyor_name
+                });
+              }, (err) => { console.log(err) });
+            }, (err) => { console.log(err) });
             this.router.navigate(['land-registration/step-2']);
           } else {
             alert("Owner credentials not valid / No land records to for credentials.");
@@ -75,6 +94,46 @@ export class LandRegistrationComponent implements OnInit {
           console.log(err);
           alert(err.message);
         });
+        break;
+      }
+
+      case 2: {
+        this.lrService.setCurrentStep(3);
+        this.stepPercentage = 50;
+        this.router.navigate(['land-registration/step-3']);
+        break;
+      }
+
+      case 3: {
+        let buyer_nic = this.stepFormRef.buyerDataForm.value.buyerNIC;
+        this.lrService.getOwnerNicFromDB({ ownerNIC: buyer_nic }).subscribe((res: any) => {
+          this.lrService.setBuyerNIC({
+            ownerNIC: res.nic_no,
+            fullname: res.fullname,
+            gender: res.gender,
+            birthday: res.birthday,
+            occupation: res.occupation,
+            postal_address: res.postal_address,
+            registered_date: res.registered_date
+          });
+        }, (err) => { console.log(err) });
+        this.lrService.setCurrentStep(4);
+        this.stepPercentage = 75;
+        this.router.navigate(['land-registration/step-4']);
+        break;
+      }
+
+      case 4: {
+        this.lrService.setCurrentStep(5);
+        this.stepPercentage = 100;
+        this.submitBtnTitle = "Commit";
+        this.router.navigate(['land-registration/step-5']);
+        break;
+      }
+
+      case 5: {
+        this.router.navigate(['dashboard']);
+        break;
       }
     }
   }
@@ -82,8 +141,28 @@ export class LandRegistrationComponent implements OnInit {
   goBack() {
     switch (this.lrService.getCurrentStep().count) {
       case 2: {
-        this.router.navigate(['land-registration/step-1']);
+        this.lrService.setCurrentStep(1);
         this.stepPercentage = 0;
+        this.router.navigate(['land-registration/step-1']);
+        break;
+      }
+      case 3: {
+        this.lrService.setCurrentStep(2);
+        this.stepPercentage = 20;
+        this.router.navigate(['land-registration/step-2']);
+        break;
+      }
+      case 4: {
+        this.lrService.setCurrentStep(3);
+        this.stepPercentage = 40;
+        this.router.navigate(['land-registration/step-3']);
+        break;
+      }
+      case 5: {
+        this.lrService.setCurrentStep(4);
+        this.stepPercentage = 60;
+        this.router.navigate(['land-registration/step-4']);
+        break;
       }
     }
   }

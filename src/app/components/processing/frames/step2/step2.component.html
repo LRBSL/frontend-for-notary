@@ -41,11 +41,11 @@
       </div>
 
       <div class="form-group row">
-          <label for="txtExtent" class="col-3 font-weight-bold pl-4 my-auto"> Extent </label>
-          <div class="col-9">
-            <input id="txtExtent" type="text" class="form-control" disabled value="{{getLandBlock().extent}}">
-          </div>
+        <label for="txtExtent" class="col-3 font-weight-bold pl-4 my-auto"> Extent </label>
+        <div class="col-9">
+          <input id="txtExtent" type="text" class="form-control" disabled value="{{getLandBlock().extent}}">
         </div>
+      </div>
 
       <div class="form-group row">
         <label for="txtBoundaries" class="col-3 font-weight-bold pl-4 my-auto"> Land Boundaries </label>
@@ -86,7 +86,8 @@
       <div class="form-group row">
         <label for="txtBirthday" class="col-3 font-weight-bold pl-4 my-auto"> Birthday </label>
         <div class="col-9">
-          <input id="txtBirthday" type="text" class="form-control" disabled value="{{getOwnerNIC().birthday.slice(0,10)}}">
+          <input id="txtBirthday" type="text" class="form-control" disabled
+            value="{{getOwnerNIC().birthday.slice(0,10)}}">
         </div>
       </div>
 
@@ -98,18 +99,20 @@
       </div>
 
       <div class="form-group row">
-          <label for="txtPostalAddress" class="col-3 font-weight-bold pl-4 my-auto"> Postal Address </label>
-          <div class="col-9">
-            <input id="txtPostalAddress" type="text" class="form-control" disabled value="{{getOwnerNIC().postal_address}}">
-          </div>
+        <label for="txtPostalAddress" class="col-3 font-weight-bold pl-4 my-auto"> Postal Address </label>
+        <div class="col-9">
+          <input id="txtPostalAddress" type="text" class="form-control" disabled
+            value="{{getOwnerNIC().postal_address}}">
         </div>
-  
-        <div class="form-group row">
-          <label for="txtRegisteredDate" class="col-3 font-weight-bold pl-4 my-auto"> Registered Date </label>
-          <div class="col-9">
-            <input id="txtRegisteredDate" type="text" class="form-control" disabled value="{{getOwnerNIC().registered_date.slice(0,10)}}">
-          </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="txtRegisteredDate" class="col-3 font-weight-bold pl-4 my-auto"> Registered Date </label>
+        <div class="col-9">
+          <input id="txtRegisteredDate" type="text" class="form-control" disabled
+            value="{{getOwnerNIC().registered_date.slice(0,10)}}">
         </div>
+      </div>
 
     </div>
   </div>
@@ -119,12 +122,40 @@
       LAND DEED DETAILS
     </div>
     <div class="card-body">
-      {{getLandBlock().id}} <br>
-      {{getLandBlock().Fullname}} <br>
-      {{getLandBlock().owner}} <br>
-      {{getLandBlock().Gender}} <br>
-      {{getLandBlock().Birthday}} <br>
-      {{getLandBlock().boundaries}} <br>
+      <div class="form-group row">
+        <label for="txtRegNo" class="col-3 font-weight-bold pl-4 my-auto"> Reg No </label>
+        <div class="col-9">
+          <input id="txtRegNo" type="text" class="form-control" disabled value="{{getLandDeed().reg_no}}">
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="txtLandID" class="col-3 font-weight-bold pl-4 my-auto"> Land ID </label>
+        <div class="col-9">
+          <input id="txtLandID" type="text" class="form-control" disabled value="{{getLandDeed().land_id}}">
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="txtNotaryName" class="col-3 font-weight-bold pl-4 my-auto"> Notary Name </label>
+        <div class="col-9">
+          <input id="txtNotaryName" type="text" class="form-control" disabled value="{{getLandDeed().notary_name}}">
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="txtDeedType" class="col-3 font-weight-bold pl-4 my-auto"> Deed Type </label>
+        <div class="col-9">
+          <input id="txtDeedType" type="text" class="form-control" disabled value="{{getLandDeed().deed_type}}">
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="txtPlanID" class="col-3 font-weight-bold pl-4 my-auto"> Plan ID </label>
+        <div class="col-9">
+          <input id="txtPlanID" type="text" class="form-control" disabled value="{{getLandDeed().plan_id}}">
+        </div>
+      </div>
     </div>
   </div>
 
@@ -133,12 +164,26 @@
       LAND PALN DETAILS
     </div>
     <div class="card-body">
-      {{getLandBlock().id}} <br>
-      {{getLandBlock().Fullname}} <br>
-      {{getLandBlock().owner}} <br>
-      {{getLandBlock().Gender}} <br>
-      {{getLandBlock().Birthday}} <br>
-      {{getLandBlock().boundaries}} <br>
+      <div class="form-group row">
+        <label for="txtRegPlanNo" class="col-3 font-weight-bold pl-4 my-auto"> Reg No </label>
+        <div class="col-9">
+          <input id="txtRegPlanNo" type="text" class="form-control" disabled value="{{getLandPlan().reg_no}}">
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="txtLandIDOfPlan" class="col-3 font-weight-bold pl-4 my-auto"> Land ID </label>
+        <div class="col-9">
+          <input id="txtLandIDOfPlan" type="text" class="form-control" disabled value="{{getLandPlan().land_id}}">
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="txtSurveyorName" class="col-3 font-weight-bold pl-4 my-auto"> Surveyor Name </label>
+        <div class="col-9">
+          <input id="txtSurveyorName" type="text" class="form-control" disabled value="{{getLandPlan().surveyor_name}}">
+        </div>
+      </div>
     </div>
   </div>
 </div>

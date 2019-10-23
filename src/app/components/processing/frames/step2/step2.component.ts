@@ -16,7 +16,8 @@ export class Step2Component implements OnInit {
   }
 
   isDataLoaded() {
-    return this.lrService.getLandBlock() != null && this.lrService.getOwnerNIC() != null;
+    return this.lrService.getLandBlock() != null && this.lrService.getOwnerNIC() != null
+      && this.lrService.getLandDeed() != null && this.lrService.getLandPlan() != null;
   }
 
   getLandBlock() {
@@ -25,6 +26,14 @@ export class Step2Component implements OnInit {
 
   getOwnerNIC() {
     return this.lrService.getOwnerNIC();
+  }
+
+  getLandDeed() {
+    return this.lrService.getLandDeed();
+  }
+
+  getLandPlan() {
+    return this.lrService.getLandPlan();
   }
 
 }

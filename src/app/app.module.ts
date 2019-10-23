@@ -20,6 +20,7 @@ import { LoginComponent } from './components/login/login.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthService } from './services/auth.service';
 import { HttpRequestResolverService } from './services/http-request-resolver.service';
+import { Step5Component } from './components/processing/frames/step5/step5.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { HttpRequestResolverService } from './services/http-request-resolver.ser
     DashboardComponent,
     LandRecordsComponent,
     SupportFacilitiesComponent,
-    LoginComponent
+    LoginComponent,
+    Step5Component
   ],
   imports: [
     BrowserModule,
