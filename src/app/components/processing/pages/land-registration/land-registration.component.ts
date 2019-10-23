@@ -26,14 +26,17 @@ export class LandRegistrationComponent implements OnInit {
   onSubmit() {
     switch (this.lrService.getCurrentStep().count) {
       case 1: {
+        let owner_nic = this.step1FormRef.ownerDataForm.value.ownerNIC;
+        let land_key = this.step1FormRef.ownerDataForm.value.landKey;
+        // owner validation from mapper table
         this.lrService.getLandIdFromMapper({
-          ownerNIC: this.step1FormRef.ownerDataForm.value.ownerNIC,
-          landKey: this.step1FormRef.ownerDataForm.value.landKey
+          ownerNIC: owner_nic,
+          landKey: land_key
         }).subscribe((res: any) => {
           if (res != null) {
             this.lrService.setOwnerCredentials({
-              ownerNIC: this.step1FormRef.ownerDataForm.value.ownerNIC,
-              landKey: this.step1FormRef.ownerDataForm.value.landKey
+              ownerNIC: owner_nic,
+              landKey: land_key
             });
             this.lrService.setLandID(res.land_id);
             this.lrService.setCurrentStep(2);
@@ -51,6 +54,17 @@ export class LandRegistrationComponent implements OnInit {
                   [res._Boundaries[2][0], res._Boundaries[2][1]],
                   [res._Boundaries[3][0], res._Boundaries[3][1]],
                 ]
+              });
+              this.lrService.getOwnerNicFromDB({ownerNIC: owner_nic}).subscribe((res:any) => {
+                this.lrService.setOwnerNIC({
+                  ownerNIC: res.nic_no,
+                  fullname: res.fullname,
+                  gender: res.gender,
+                  birthday: res.birthday,
+                  occupation: res.occupation,
+                  postal_address: res.postal_address,
+                  registered_date: res.registered_date
+                });
               });
             }, (err) => {console.log(err)});
             this.router.navigate(['land-registration/step-2']);

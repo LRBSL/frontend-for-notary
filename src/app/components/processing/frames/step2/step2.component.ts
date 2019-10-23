@@ -15,12 +15,16 @@ export class Step2Component implements OnInit {
     this.lrService.setCurrentStep(2);
   }
 
-  isLandBlockLoaded() {
-    return this.lrService.getLandBlock() != null;
+  isDataLoaded() {
+    return this.lrService.getLandBlock() != null && this.lrService.getOwnerNIC() != null;
   }
 
   getLandBlock() {
     return this.lrService.getLandBlock();
+  }
+
+  getOwnerNIC() {
+    return this.lrService.getOwnerNIC();
   }
 
 }

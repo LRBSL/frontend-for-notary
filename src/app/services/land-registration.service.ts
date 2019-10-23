@@ -20,6 +20,16 @@ export interface LandBlock {
   boundaries: number[][];
 }
 
+export interface NIC {
+  ownerNIC: string;
+  fullname?: number;
+  gender?: string;
+  birthday?: Date;
+  occupation?: string;
+  postal_address?: string;
+  registered_date?: Date;
+}
+
 export const steps: Step[] = [
   {count: 1, title: 'Owner Validation'},
   {count: 2, title: 'Land Details Validation'},
@@ -36,12 +46,14 @@ export class LandRegistrationService {
   private ownerCredentials: OwnerCredentials;
   private landID: string;
   private landBlock: LandBlock;
+  private ownerNIC: NIC;
 
   // constructor
   constructor(private httpService: HttpRequestResolverService) {
     this.ownerCredentials = null;
     this.landID = null;
     this.landBlock = null;
+    this.ownerNIC = null;
   }
 
   // get the current step
@@ -80,12 +92,28 @@ export class LandRegistrationService {
     this.landBlock = landBlock;
   }
 
+  // get the owner nic
+  public getOwnerNIC(): NIC {
+    return this.ownerNIC;
+  }
+  // set the owner nic
+  public setOwnerNIC(ownerNIC: NIC): void {
+    this.ownerNIC = ownerNIC;
+  }
+
   // get the land id from mapper table
   public getLandIdFromMapper(ownerCredentials: OwnerCredentials) {
     return this.httpService.realizarHttpPost('/api/landCredentials', ownerCredentials)
   }
 
+  // get the land block information from the block chain
   public getLandBlockInfo(landID: number) {
     return this.httpService.realizarHttpGet('http://13.229.128.106:9000/land/queryLand/' + landID);
   }
+
+  // get the owner nic from nic table
+  public getOwnerNicFromDB(ownerNIC: NIC) {
+    return this.httpService.realizarHttpPost('/api/getNic', ownerNIC);
+  }
+  
 }
