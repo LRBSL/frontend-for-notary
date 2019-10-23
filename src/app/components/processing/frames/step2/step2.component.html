@@ -1,1 +1,14 @@
-<p>step2 works!</p>
+<div class="container-fluid" *ngIf="!isLandBlockLoaded()">
+  <div class="col-5 mx-auto">
+    <img src="assets/loading.gif" class="img-fluid"/>
+  </div>
+</div>
+
+<div class="container-fluid" *ngIf="isLandBlockLoaded()">
+  {{getLandBlock().id}} <br>
+  {{getLandBlock().extent}} <br>
+  {{getLandBlock().owner}} <br>
+  {{getLandBlock().parentLandID}} <br>
+  {{getLandBlock().rlRegistry}} <br>
+  {{getLandBlock().boundaries}} <br>
+</div>

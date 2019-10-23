@@ -11,6 +11,15 @@ export interface OwnerCredentials {
   landKey: string;
 }
 
+export interface LandBlock {
+  id: string;
+  extent: number;
+  owner: string;
+  parentLandID: string;
+  rlRegistry: string;
+  boundaries: number[][];
+}
+
 export const steps: Step[] = [
   {count: 1, title: 'Owner Validation'},
   {count: 2, title: 'Land Details Validation'},
@@ -26,10 +35,13 @@ export class LandRegistrationService {
   private currentStep: Step;
   private ownerCredentials: OwnerCredentials;
   private landID: string;
+  private landBlock: LandBlock;
 
   // constructor
   constructor(private httpService: HttpRequestResolverService) {
     this.ownerCredentials = null;
+    this.landID = null;
+    this.landBlock = null;
   }
 
   // get the current step
@@ -59,12 +71,21 @@ export class LandRegistrationService {
     this.landID = landID;
   }
 
+  // get the land block
+  public getLandBlock(): LandBlock {
+    return this.landBlock;
+  }
+  // set the land block
+  public setLandBlock(landBlock: LandBlock): void {
+    this.landBlock = landBlock;
+  }
+
   // get the land id from mapper table
   public getLandIdFromMapper(ownerCredentials: OwnerCredentials) {
     return this.httpService.realizarHttpPost('/api/landCredentials', ownerCredentials)
   }
 
   public getLandBlockInfo(landID: number) {
-    return this.httpService.realizarHttpGet('http://13.229.128.106:8000/land/queryLand/' + landID);
+    return this.httpService.realizarHttpGet('http://13.229.128.106:9000/land/queryLand/' + landID);
   }
 }

@@ -38,9 +38,21 @@ export class LandRegistrationComponent implements OnInit {
             this.lrService.setLandID(res.land_id);
             this.lrService.setCurrentStep(2);
             this.stepPercentage = 25;
-            this.lrService.getLandBlockInfo(1).subscribe((res) => {
-              console.log("Success : " + res)}, 
-              (err)=>console.log(err));
+            this.lrService.getLandBlockInfo(1).subscribe((res:any) => {
+              this.lrService.setLandBlock({
+                id: res._id,
+                extent: res._Extent,
+                owner: res._Owner,
+                parentLandID: res._ParentLandID,
+                rlRegistry: res._RLRegistry,
+                boundaries: [
+                  [res._Boundaries[0][0], res._Boundaries[0][1]],
+                  [res._Boundaries[1][0], res._Boundaries[1][1]],
+                  [res._Boundaries[2][0], res._Boundaries[2][1]],
+                  [res._Boundaries[3][0], res._Boundaries[3][1]],
+                ]
+              });
+            }, (err) => {console.log(err)});
             this.router.navigate(['land-registration/step-2']);
           } else {
             alert("Owner credentials not valid / No land records to for credentials.");

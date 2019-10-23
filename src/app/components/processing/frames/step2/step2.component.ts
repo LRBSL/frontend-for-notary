@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { LandRegistrationService } from 'src/app/services/land-registration.service';
+import { LandRegistrationService, LandBlock } from 'src/app/services/land-registration.service';
 
 @Component({
   selector: 'app-processing-step2',
@@ -8,10 +8,19 @@ import { LandRegistrationService } from 'src/app/services/land-registration.serv
 })
 export class Step2Component implements OnInit {
 
-  constructor(private lrService: LandRegistrationService) { }
+  constructor(private lrService: LandRegistrationService) {
+  }
 
   ngOnInit() {
     this.lrService.setCurrentStep(2);
+  }
+
+  isLandBlockLoaded() {
+    return this.lrService.getLandBlock() != null;
+  }
+
+  getLandBlock() {
+    return this.lrService.getLandBlock();
   }
 
 }

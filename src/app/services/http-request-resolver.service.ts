@@ -23,7 +23,7 @@ export class HttpRequestResolverService {
     const headers = new HttpHeaders({
       "Content-Type": "application/json"
     });
-    return this.http.post(url, {
+    return this.http.get(url, {
       headers: headers
     });
   }
