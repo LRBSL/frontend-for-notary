@@ -44,7 +44,7 @@ export class LandRegistrationComponent implements OnInit {
             this.lrService.setLandID(res.land_id);
             this.lrService.setCurrentStep(2);
             this.stepPercentage = 25;
-            this.lrService.getLandBlockInfo(1).subscribe((res: any) => {
+            this.lrService.getLandBlockInfo(res.land_id).subscribe((res: any) => {
               this.lrService.setLandBlock({
                 id: res._id,
                 extent: res._Extent,
@@ -116,10 +116,10 @@ export class LandRegistrationComponent implements OnInit {
             postal_address: res.postal_address,
             registered_date: res.registered_date
           });
-        }, (err) => { console.log(err) });
-        this.lrService.setCurrentStep(4);
-        this.stepPercentage = 75;
-        this.router.navigate(['land-registration/step-4']);
+          this.lrService.setCurrentStep(4);
+          this.stepPercentage = 75;
+          this.router.navigate(['land-registration/step-4']);
+        }, (err) => { alert(err) });
         break;
       }
 
@@ -132,7 +132,14 @@ export class LandRegistrationComponent implements OnInit {
       }
 
       case 5: {
-        this.router.navigate(['dashboard']);
+        this.lrService.changeNotaryVote(this.lrService.getLandID(), 1, this.lrService.getBuyerNIC().fullname).subscribe((res: any) => {
+          alert("Transaction successfully committed for the Regional Land Registration process.");
+          this.router.navigate(['dashboard']);
+        }, (err) => {
+          console.log(err);
+          alert("Transaction not committed due to some reason. Try again.");
+          this.router.navigate(['land-registration']);
+        })
         break;
       }
     }

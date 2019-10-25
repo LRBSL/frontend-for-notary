@@ -15,6 +15,7 @@ export interface LandBlock {
   id: string;
   extent: number;
   owner: string;
+  newOwner?: string;
   parentLandID: string;
   rlRegistry: string;
   boundaries: number[][];
@@ -153,8 +154,13 @@ export class LandRegistrationService {
   }
 
   // get the land block information from the block chain
-  public getLandBlockInfo(landID: number) {
-    return this.httpService.realizarHttpGet('http://13.229.128.106:9000/land/queryLand/' + landID);
+  public getLandBlockInfo(landID: string) {
+    return this.httpService.realizarHttpGet('/bc/land/queryLand/' + landID);
+  }
+
+  // get all land blocks information from the block chain
+  public getAllLandBlocksInfo() {
+    return this.httpService.realizarHttpGet('/bc/land/queryAllLands/');
   }
 
   // get the owner nic from nic table
@@ -170,6 +176,16 @@ export class LandRegistrationService {
   // get the land plan from plan table
   public getLandPlanFromDB(landPlan: Plan) {
     return this.httpService.realizarHttpPost('/api/getPlan', landPlan);
+  }
+
+  // change notary vote in the block chain
+  public changeNotaryVote(landID: string, vote: number, newOwner: string) {
+    return this.httpService.realizarHttpPost('/bc/land/changeNotaryVote/', 
+    { 
+      id: landID, 
+      vote: vote,
+      newOwner: newOwner
+    });
   }
   
 }
