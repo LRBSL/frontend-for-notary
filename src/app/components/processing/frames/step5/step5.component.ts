@@ -14,4 +14,11 @@ export class Step5Component implements OnInit {
     this.lrService.setCurrentStep(5);
   }
 
+  isDataLoaded() {
+    return this.lrService.getBuyerNIC() != null;
+  }
+
+  getBuyerNIC() {
+    return this.lrService.getBuyerNIC();
+  }
 }

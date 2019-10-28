@@ -43,7 +43,7 @@ export class LandRegistrationComponent implements OnInit {
             });
             this.lrService.setLandID(res.land_id);
             this.lrService.setCurrentStep(2);
-            this.stepPercentage = 25;
+            this.stepPercentage = 20;
             this.lrService.getLandBlockInfo(res.land_id).subscribe((res: any) => {
               this.lrService.setLandBlock({
                 id: res._id,
@@ -99,12 +99,19 @@ export class LandRegistrationComponent implements OnInit {
 
       case 2: {
         this.lrService.setCurrentStep(3);
-        this.stepPercentage = 50;
+        this.stepPercentage = 40;
         this.router.navigate(['land-registration/step-3']);
         break;
       }
 
       case 3: {
+        this.lrService.setCurrentStep(4);
+        this.stepPercentage = 60;
+        this.router.navigate(['land-registration/step-4']);
+        break;
+      }
+
+      case 4: {
         let buyer_nic = this.stepFormRef.buyerDataForm.value.buyerNIC;
         this.lrService.getOwnerNicFromDB({ ownerNIC: buyer_nic }).subscribe((res: any) => {
           this.lrService.setBuyerNIC({
@@ -116,22 +123,22 @@ export class LandRegistrationComponent implements OnInit {
             postal_address: res.postal_address,
             registered_date: res.registered_date
           });
-          this.lrService.setCurrentStep(4);
-          this.stepPercentage = 75;
-          this.router.navigate(['land-registration/step-4']);
+          this.lrService.setCurrentStep(5);
+          this.stepPercentage = 80;
+          this.router.navigate(['land-registration/step-5']);
         }, (err) => { alert(err) });
         break;
       }
 
-      case 4: {
-        this.lrService.setCurrentStep(5);
+      case 5: {
+        this.lrService.setCurrentStep(6);
         this.stepPercentage = 100;
         this.submitBtnTitle = "Commit";
-        this.router.navigate(['land-registration/step-5']);
+        this.router.navigate(['land-registration/step-6']);
         break;
       }
 
-      case 5: {
+      case 6: {
         this.lrService.changeNotaryVote(this.lrService.getLandID(), 1, this.lrService.getBuyerNIC().fullname).subscribe((res: any) => {
           alert("Transaction successfully committed for the Regional Land Registration process.");
           this.router.navigate(['dashboard']);
@@ -171,10 +178,18 @@ export class LandRegistrationComponent implements OnInit {
         this.router.navigate(['land-registration/step-4']);
         break;
       }
+      case 6: {
+        this.lrService.setCurrentStep(5);
+        this.stepPercentage = 80;
+        this.router.navigate(['land-registration/step-5']);
+        break;
+      }
     }
   }
 
   cancelProcess() {
+    this.lrService.setCurrentStep(1);
+    this.stepPercentage = 0;
     this.router.navigate(['land-registration/step-1']);
   }
 }

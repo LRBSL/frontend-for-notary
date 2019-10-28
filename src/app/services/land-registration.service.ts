@@ -19,6 +19,9 @@ export interface LandBlock {
   parentLandID: string;
   rlRegistry: string;
   boundaries: number[][];
+  surveyorVote?: number;
+  notaryVote?: number;
+  currentOwnerVote?: number;
 }
 
 export interface NIC {
@@ -48,9 +51,10 @@ export interface Plan {
 export const steps: Step[] = [
   {count: 1, title: 'Owner Validation'},
   {count: 2, title: 'Land Details Validation'},
-  {count: 3, title: 'New Owner Validation'},
-  {count: 4, title: 'New Owner Information'},
-  {count: 5, title: 'Execute The Transaction'}
+  {count: 3, title: 'Land History Validation'},
+  {count: 4, title: 'New Owner Validation'},
+  {count: 5, title: 'New Owner Information'},
+  {count: 6, title: 'Execute The Transaction'}
 ];
 
 @Injectable({
@@ -186,6 +190,11 @@ export class LandRegistrationService {
       vote: vote,
       newOwner: newOwner
     });
+  }
+
+  // get history for land from the block chain
+  public getHistoryForLand(landID: string) {
+    return this.httpService.realizarHttpGet('/bc/land/getHistoryForLand/' + landID);
   }
   
 }

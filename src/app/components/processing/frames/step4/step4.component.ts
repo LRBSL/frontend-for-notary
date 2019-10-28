@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LandRegistrationService } from 'src/app/services/land-registration.service';
+import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-processing-step4',
@@ -7,6 +8,9 @@ import { LandRegistrationService } from 'src/app/services/land-registration.serv
   styleUrls: ['./step4.component.css']
 })
 export class Step4Component implements OnInit {
+  buyerDataForm = new FormGroup({
+    buyerNIC: new FormControl('')
+  });
 
   constructor(private lrService: LandRegistrationService) { }
 
@@ -14,11 +18,4 @@ export class Step4Component implements OnInit {
     this.lrService.setCurrentStep(4);
   }
 
-  isDataLoaded() {
-    return this.lrService.getBuyerNIC() != null;
-  }
-
-  getBuyerNIC() {
-    return this.lrService.getBuyerNIC();
-  }
 }
